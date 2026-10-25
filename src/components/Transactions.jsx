@@ -1,4 +1,6 @@
-import { ArrowRight } from "lucide-react";
+import {ArrowRight} from "lucide-react";
+import TransactionInfoCard from "./TransactionInfoCard.jsx";
+import moment from "moment";
 
 const Transactions = ({transactions, onMore, type, title}) => {
     return (
