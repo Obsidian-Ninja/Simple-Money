@@ -1,5 +1,6 @@
 import { Trash2, TrendingDown, TrendingUp, UtensilsCrossed } from "lucide-react";
 import { addThousandsSeparator } from "../util/util";
+import income from "../pages/Income.jsx";
 
 const TransactionInfoCard = () => {
     const getAmountStyles = () => type === 'income' ? 'bg-green-50 text-green-800' : 'bg-red-50 text-red-800'
