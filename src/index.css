@@ -16,7 +16,7 @@ body {
 }
 
 .input-box{
-  @apply w-full flex ustify-between gap-3 text-sm text-gray-800 bg-gray-50 rounded px-4 py-3 mb-4 mt-3 border border-gray-200 outline-none;
+  @apply w-full flex justify-between gap-3 text-sm text-gray-800 bg-gray-50 rounded px-4 py-3 mb-4 mt-3 border border-gray-200 outline-none;
 }
 
 .btn-primary {
