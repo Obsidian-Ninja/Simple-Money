@@ -1,5 +1,6 @@
 import { Download, LoaderCircle, Mail } from "lucide-react";
 import { useState } from "react";
+import TransactionInfoCard from "./TransactionInfoCard.jsx";
 
 const IncomeList = ({transactions, onDelete, onDownload, onEmail}) => {
     
