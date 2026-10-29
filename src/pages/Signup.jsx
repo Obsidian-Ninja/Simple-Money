@@ -2,6 +2,14 @@ import { LoaderCircle } from "lucide-react";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import {assets} from "../assets/assets.js";
+import Input from "../components/Input.jsx";
+import ProfilePhotoSelector from "../components/ProfilePhotoSelector.jsx";
+import uploadProfileImage from "../util/uploadProfileImage.js";
+import Header from "../components/Header.jsx";
+import {validateEmail} from "../util/validation.js";
+import axiosConfig from "../util/axiosConfig.jsx";
+import {API_ENDPOINTS} from "../util/apiEndpoints.js";
 
 const Signup = () => {
     
