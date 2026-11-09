@@ -2,7 +2,7 @@
 
 A responsive personal finance management application built with React, Tailwind CSS, Spring Boot, and MySQL to help users track expenses, manage income, monitor transactions, and gain better control over their finances.
 
-Website is live @ 
+Website is live @ https://simple-money-inky.vercel.app/home
 
 <img width="3024" height="1964" alt="image" src="https://github.com/user-attachments/assets/05c8c27c-b7ca-4522-a887-76bcd32560aa" />
 
