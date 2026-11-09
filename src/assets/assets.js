@@ -1,6 +1,6 @@
-import logo from "./logo.png";
-import login_bg from "./login-bg.png";
-import landing from "./landing.png";
+import logo from "../../public/logo.png";
+import login_bg from "../../public/login-bg.png";
+import landing from "../../public/landing.png";
 import {Coins, FunnelPlus, LayoutDashboard, List, Wallet} from "lucide-react";
 
 export const assets = {

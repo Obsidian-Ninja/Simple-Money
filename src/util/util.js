@@ -12,8 +12,8 @@ export const addThousandsSeparator = (num) => {
 
     // regex for indian numbering system
     // it handles the first three digits, then every two digits
-    const lastThree = integerPart.subString(integerPart.length - 3);
-    const otherNumbers = integerPart.subString(0, integerPart.length - 3);
+    const lastThree = integerPart.substring(integerPart.length - 3);
+    const otherNumbers = integerPart.substring(0, integerPart.length - 3);
 
     if (otherNumbers !== '') {
         // Apply comma after every two digits for the 'otherNumbers' part

@@ -5,7 +5,6 @@ import axiosConfig from "../util/axiosConfig.jsx";
 import {API_ENDPOINTS} from "../util/apiEndpoints.js";
 import toast from "react-hot-toast";
 import IncomeList from "../components/IncomeList.jsx";
-import log from "eslint-plugin-react/lib/util/log.js";
 import Modal from "../components/Modal.jsx";
 import {Plus} from "lucide-react";
 import AddIncomeForm from "../components/AddIncomeForm.jsx";
@@ -53,12 +52,13 @@ const Income = () => {
             }
         } catch (error) {
             console.log('Failed to fetch income categories', error);
-            toast.error(error.data?.message || "Failed to fetch income categories");
+            toast.error(error.response?.data?.message || "Failed to fetch income categories");
         }
     }
 
     // save the income details
     const handleAddIncome = async (income) => {
+        const {name, amount, date, icon, categoryId} = income;
 
         // basic validation
         if(!name.trim()){
@@ -76,7 +76,7 @@ const Income = () => {
             return;
         }
 
-        const today = new Date().toISOString.split('T')[0];
+        const today = new Date().toISOString().split('T')[0];
         if(date > today){
             toast.error("Date cannot be in the future");
             return;
@@ -95,8 +95,13 @@ const Income = () => {
                 date,
                 icon,
                 categoryId,
-            })
-            
+            });
+
+            if(response.status === 201 || response.status === 200) {
+                toast.success("Income added successfully! 🎉");
+                setOpenAddIncomeModal(false);
+                fetchIncomeDetails();
+            }
         } catch (error) {
             console.log("Error adding income", error);
             toast.error(error.response?.data?.message || "Failed to add income");
@@ -131,7 +136,6 @@ const Income = () => {
             link.parentNode.removeChild(link);
             window.URL.revokeObjectURL(url);
             toast.success("Income details downloaded successfully! 🎉");
-            
         } catch (error) {
             console.log('Error downloading income details', error);
             toast.error(error.response?.data?.message || "Failed to download income details");
@@ -166,7 +170,7 @@ const Income = () => {
 
                     <IncomeList
                         transactions={incomeData}
-                        onDelete={(id) => setOpenDeleteAlert({show: true, data: null})}
+                        onDelete={(id) => setOpenDeleteAlert({show: true, data: id})}
                         onDownload={handleDownloadIncomeDetails}
                         onEmail={handleEmailIncomeDetails}
                     />

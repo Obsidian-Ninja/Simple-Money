@@ -13,7 +13,7 @@ body {
 }
 
 .card-btn {
-  @apply flex items-center gap-3 text-[12px] font-medium text-gray-600 hover:text-purple-800 bg-gray-50 hover:bg-purple-50 px-4 py-1.5 rounded-lg border border-gray-200/50 cursor-pointer;
+  @apply flex items-center gap-3 text-[12px] font-medium text-gray-600 hover:text-[#299ED8] bg-gray-50 hover:bg-[#55C5ED] px-4 py-1.5 rounded-lg border border-gray-200/50 cursor-pointer;
 }
 
 .input-box{
@@ -21,7 +21,7 @@ body {
 }
 
 .btn-primary {
-  @apply w-full text-sm font-medium text-white bg-purple-900 shadow-lg shadow-purple-800/20 p-[10px] rounded-md my-1 hover:bg-purple-700 hover:shadow-purple-900/30;
+  @apply w-full text-sm font-medium text-white bg-[#2f9bd1] shadow-lg shadow-[#299ED8]/20 p-[10px] rounded-md my-1 hover:bg-[#299ED8] hover:shadow-[#299ED8]/30;
 }
 
 .add-btn {
@@ -29,5 +29,5 @@ body {
 }
 
 .add-btn-fill {
-  @apply text-white bg-purple-600;
+  @apply text-white bg-[#299ED8];
 }

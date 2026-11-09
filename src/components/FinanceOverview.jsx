@@ -1,6 +1,7 @@
 import { addThousandsSeparator } from "../util/util";
+import CustomPieChart from "./CustomPieChart.jsx";
 
-const FinanceOverview = () => {
+const FinanceOverview = ({ balanceData, totalBalance, COLORS }) => {
     return (
         <div className="card">
             <div className="flex items-center justify-between">

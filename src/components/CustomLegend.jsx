@@ -14,3 +14,5 @@ const CustomLegend = ({payload}) => {
         </div>
     )
 }
+
+export default CustomLegend;

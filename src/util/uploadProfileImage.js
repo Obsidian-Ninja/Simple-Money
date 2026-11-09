@@ -28,3 +28,5 @@ const uploadProfileImage = async (image) => {
         throw error;
     }
 }
+
+export default uploadProfileImage;

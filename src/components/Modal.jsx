@@ -1,13 +1,14 @@
 import { X } from "lucide-react";
 
-const Modal = ({isOpen, onClose, Children, title}) => {
+const Modal = ({ isOpen, onClose, children, title }) => {
 
-    if(!isOpen) {
+    if (!isOpen) {
         return null;
     }
+
     return (
-        <div className="fixed inset-0 z-50 flex justify-center items center w-full h-full overflow-hidden bg-black/40 backdrop-blur-sm">
-            <div className="relative p-4 w-full max-2xl max-h-[90vh]">
+        <div className="fixed inset-0 z-50 flex justify-center items-center w-full h-full overflow-hidden bg-black/40 backdrop-blur-sm">
+            <div className="relative p-4 w-full max-w-2xl max-h-[90vh]">
                 {/* Modal header */}
                 <div className="relative bg-white rounded-xl shadow-2xl border border-gray-100">
                     {/* Modal content */}
@@ -18,20 +19,20 @@ const Modal = ({isOpen, onClose, Children, title}) => {
 
                         <button
                             type="button"
-                            className="text-gray-500 bg-gray-50 hover:bg-gray-100 hover:text-gray-700 rounded-lg text-sm w-9 h-9 flex justify-center items-center transactions-colors duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                            className="text-gray-500 bg-gray-50 hover:bg-gray-100 hover:text-gray-700 rounded-lg text-sm w-9 h-9 flex justify-center items-center transition-colors duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                             onClick={onClose}
-                        > <X className="w-4 h-4" />
+                        >
+                            <X className="w-4 h-4" />
                         </button>
                     </div>
 
                     {/* Modal body */}
-                    <div className="p-5md:p-6 text-gray-700">
+                    <div className="p-5 md:p-6 text-gray-700">
                         {children}
                     </div>
                 </div>
             </div>
         </div>
-
     )
 }
 

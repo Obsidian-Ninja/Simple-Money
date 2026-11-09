@@ -23,7 +23,9 @@ const Category = () => {
         setLoading(true);
         try {
             const response = await axiosConfig.get(API_ENDPOINTS.GET_ALL_CATEGORIES);
-            
+            if(response.status === 200) {
+                setCategoryData(response.data);
+            }
         } catch (error) {
             console.error('Something went wrong. Please try again in some time', error);
             toast.error(error.message);
@@ -41,16 +43,17 @@ const Category = () => {
 
         if(!name.trim()){
             toast.error("Category Name is a required field");
-            return ;
+            return;
         }
 
         //checking if the category already exists
         const isDuplicate = categoryData.some((category) => {
-            return category.name.toLowercase() === name.trim().toLowerCase();
+            return category.name.toLowerCase() === name.trim().toLowerCase();
         })
 
         if(isDuplicate) {
             toast.error("Category Name already exists! Please try again.");
+            return;
         }
 
         try{
@@ -70,10 +73,12 @@ const Category = () => {
         const {id, name, type, icon} = updatedCategory;
         if(!name.trim()){
             toast.error("Category Name is a required field");
+            return;
         }
 
         if(!id){
             toast.error("Category ID is missing");
+            return;
         }
 
         try {
@@ -88,8 +93,12 @@ const Category = () => {
         }
     }
 
+    const handleEditCategory = (category) => {
+        setSelectedCategory(category);
+        setOpenEditCategoryModel(true);
+    }
+
     return (
-        
         <>
             <Dashboard activeMenu="Category">
                 <div className="my-5 mx-auto">
@@ -100,7 +109,7 @@ const Category = () => {
                             className="add-btn flex items-center gap-1"
                             onClick={()=> setOpenAddCategoryModal(true)}
                             >
-                             <Plus size={15} />
+                            <Plus size={15} />
                             Add Category
                         </button>
                     </div>
@@ -108,19 +117,19 @@ const Category = () => {
                     {/* CATEGORY LIST */}
                     <CategoryList categories= {categoryData} openEditCategory={handleEditCategory} />
 
-                        {/* ADDING CATEGORY MODALS */}
-                        <Modal
+                    {/* ADDING CATEGORY MODALS */}
+                    <Modal
                         isOpen={openAddCategoryModal}
                         onClose={() => 
                             setOpenAddCategoryModal(false)
                         }
                         title="Add Category"
                         >
-                            <AddCategoryForm openAddCategory={handleAddCategory} />   
-                        </Modal>
+                        <AddCategoryForm openAddCategory={handleAddCategory} />  
+                    </Modal>
 
-                        {/* UPDATING CATEGORY MODEL */}
-                        <Modal
+                    {/* UPDATING CATEGORY MODEL */}
+                    <Modal
                         onClose={()=>{
                             setOpenEditCategoryModel(false);
                             setSelectedCategory(null);
@@ -128,12 +137,12 @@ const Category = () => {
                         isOpen={openEditCategoryModal}
                         title="Update Category"
                         >
-                            <AddCategoryForm 
+                        <AddCategoryForm 
                             initialCategoryData={selectedCategory}
                             openAddCategory={handleUpdateCategory}
                             isEditing={true}
-                            />
-                        </Modal>
+                        />
+                    </Modal>
                 </div>
             </Dashboard>
         </>

@@ -18,21 +18,20 @@ const CategoryList = ({categories, onEditCategory}) => {
                         <div
                             key={category.id}
                             className="group relative flex items-center gap-4 p-3 rounded-lg hover:bg-gray-100/60">
-                            {/* Icon/Emoji disply*/}
+                            {/* Icon/Emoji display */}
                             <div className="w-12 h-12 flex items-center justify-center text-xl text-gray-800 bg-gray-100 rounded-full">
                                 {category.icon ? (
                                     <span className="text-2xl">
                                         <img src={category.icon} alt={category.name} className="h-5 w-5" />
                                     </span>
                                 ): (
-                                    <Layers2 className="text-purple-800" size={24} />
+                                    <Layers2 className="text-[#55C5ED]" size={24} />
                                 )}
                             </div>
 
-
-                            {/* Category Details*/}
+                            {/* Category Details */}
                             <div className="flex-1 flex items-center justify-between">
-                                {/* Category name and type*/}
+                                {/* Category name and type */}
                                 <div>
                                     <p className="text-sm text-gray-700 font-medium">
                                         {category.name}
@@ -41,7 +40,7 @@ const CategoryList = ({categories, onEditCategory}) => {
                                         {category.type}
                                     </p>
                                 </div>
-                                {/* Action buttons*/}
+                                {/* Action buttons */}
                                 <div className="flex items-center gap-2">
                                     <button
                                         onClick={() => onEditCategory(category)}
