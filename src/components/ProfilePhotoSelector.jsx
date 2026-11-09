@@ -1,13 +1,13 @@
 import { Trash, Upload, User } from "lucide-react";
-import {useRef, useState} from "react";
+import { useRef, useState } from "react";
 
-const ProfilePhotoSelector = ({image, setImage}) => {
+const ProfilePhotoSelector = ({ image, setImage }) => {
     const inputRef = useRef(null);
     const [previewUrl, setPreviewUrl] = useState(null);
 
     const handleImageChange = (e) => {
         const file = e.target.files[0];
-        if(file){
+        if (file) {
             setImage(file);
 
             const preview = URL.createObjectURL(file);
@@ -28,7 +28,8 @@ const ProfilePhotoSelector = ({image, setImage}) => {
 
     return (
         <div className="flex justify-center mb-6">
-            <input type="file" 
+            <input
+                type="file"
                 accept="image/*"
                 ref={inputRef}
                 onChange={handleImageChange}
@@ -36,25 +37,30 @@ const ProfilePhotoSelector = ({image, setImage}) => {
             />
 
             {!image ? (
-                <div className="w-20 h-20 flex items-center justify-center bg-purple-100 rounded-full relative">
-                    <User className="text-purple-500" size={35} />
+                <div className="w-20 h-20 flex items-center justify-center bg-[#c0e5f3] rounded-full relative">
+                    <User className="text-[#299ED8]" size={35} />
 
                     <button
+                        type="button"
                         onClick={onChooseFile}
-                        className="w-8 h-8 flex items-center justify-center bg-primary text-white rounded-full absolute -bottom-1 -right-1">
-                            <Upload size={15} className="text-purple-500" />
+                        className="w-8 h-8 flex items-center justify-center bg-primary text-white rounded-full absolute -bottom-1 -right-1"
+                    >
+                        <Upload size={15} className="text-[#299ED8]" />
                     </button>
                 </div>
             ) : (
                 <div className="relative">
-                    <img src={previewUrl} alt="profile photo" className="w-20 h-20 rounded-full object-cover"/>
+                    <img src={previewUrl} alt="profile photo" className="w-20 h-20 rounded-full object-cover" />
+
                     <button
+                        type="button"
                         onClick={handleRemoveImage}
-                        className="w-8 h-8 flex items-center justify-center bg-red-800 text-white rounded-full absolute -bottom-1 -right-1">
-                            <Trash size={15} />
-                        </button>
+                        className="w-8 h-8 flex items-center justify-center bg-red-800 text-white rounded-full absolute -bottom-1 -right-1"
+                    >
+                        <Trash size={15} />
+                    </button>
                 </div>
-            )} 
+            )}
         </div>
     )
 }

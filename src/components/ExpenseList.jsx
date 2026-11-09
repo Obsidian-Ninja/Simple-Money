@@ -1,5 +1,6 @@
 import { Mail } from "lucide-react";
-import Transactions from "./Transactions";
+import moment from "moment";
+import TransactionInfoCard from "./TransactionInfoCard";
 
 const ExpenseList = ({ transactions, onDelete, onDownload, onEmail }) => {
     return (
@@ -7,15 +8,15 @@ const ExpenseList = ({ transactions, onDelete, onDownload, onEmail }) => {
             <div className="flex items-center justify-between">
                 <h5 className="text-lg">All Expenses</h5>
                 <div className="flex items-center justify-end gap-2">
-                    <button className="card-btn" onClick={onEmail}>
+                    <button className="card-btn" onClick={onDownload}>
                         <Mail size={15} className="text-base" /> Download
                     </button>
                 </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2">
-                {Transactions?.map((expense) => (
-                    <TransactionInfoCard 
+                {transactions?.map((expense) => (
+                    <TransactionInfoCard
                         key={expense.id}
                         title={expense.name}
                         icon={expense.icon}

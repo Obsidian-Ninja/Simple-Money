@@ -4,7 +4,6 @@ import { LoaderCircle } from "lucide-react";
 import Input from "./Input.jsx";
 
 const AddIncomeForm = ({onAddIncome, categories}) => {
-    
     const [income, setIncome] = useState({
         name: '',
         amount: '',
@@ -15,10 +14,10 @@ const AddIncomeForm = ({onAddIncome, categories}) => {
 
     const [loading, setLoading] = useState(false);
 
-    const categoryOptions = Categories.map(category => ({
+    const categoryOptions = (categories || []).map(category => ({
         value: category.id,
         label: category.name
-    }))
+    }));
 
     const handleChange = (key, value) => {
         setIncome({...income, [key]: value})
@@ -35,19 +34,19 @@ const AddIncomeForm = ({onAddIncome, categories}) => {
     }
 
     useEffect(() => {
-        if(categories.length > 0 && !income.categoryId){
+        if(categories?.length > 0 && !income.categoryId){
             setIncome((prev) => ({...prev, categoryId: categories[0].id}))
         }
     }, [categories, income.categoryId]);
-    
+
     return (
         <div>
-            <EmojiPickerPopup 
+            <EmojiPickerPopup
                 icon={income.icon}
                 onSelect={(selectedIcon) => handleChange('icon', selectedIcon)}
             />
 
-            <Input 
+            <Input
                 value={income.name}
                 onChange={({target}) => handleChange('name', target.value)}
                 label="Income Source"
@@ -55,7 +54,7 @@ const AddIncomeForm = ({onAddIncome, categories}) => {
                 type="text"
             />
 
-            <Input 
+            <Input
                 value={income.categoryId}
                 onChange={({target}) => handleChange('categoryId', target.value)}
                 label="Category"
@@ -63,7 +62,7 @@ const AddIncomeForm = ({onAddIncome, categories}) => {
                 options={categoryOptions}
             />
 
-            <Input 
+            <Input
                 value={income.amount}
                 onChange={({target}) => handleChange('amount', target.value)}
                 label="Amount"
@@ -71,7 +70,7 @@ const AddIncomeForm = ({onAddIncome, categories}) => {
                 type="number"
             />
 
-            <Input 
+            <Input
                 value={income.date}
                 onChange={({target}) => handleChange('date', target.value)}
                 label="Date"
@@ -81,6 +80,7 @@ const AddIncomeForm = ({onAddIncome, categories}) => {
 
             <div className="flex justify-end mt-6">
                 <button
+                    type="button"
                     className="add-btn add-btn-fill"
                     disabled={loading}
                     onClick={handleAddIncome}

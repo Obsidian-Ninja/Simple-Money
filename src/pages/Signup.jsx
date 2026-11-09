@@ -1,7 +1,7 @@
 import { LoaderCircle } from "lucide-react";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import {assets} from "../assets/assets.js";
 import Input from "../components/Input.jsx";
 import ProfilePhotoSelector from "../components/ProfilePhotoSelector.jsx";
@@ -12,7 +12,6 @@ import axiosConfig from "../util/axiosConfig.jsx";
 import {API_ENDPOINTS} from "../util/apiEndpoints.js";
 
 const Signup = () => {
-    
     const [fullName, setFullName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -50,19 +49,19 @@ const Signup = () => {
 
         // signup api call
         try {
-            
             // upload image if present
             if(profilePhoto){
                 const imageUrl = await uploadProfileImage(profilePhoto);
                 profileImageUrl = imageUrl || "";
             }
 
-            const response = await axiosConfig.post(API_ENPOINTS.REGISTER, {
+            const response = await axiosConfig.post(API_ENDPOINTS.REGISTER, {
                 fullName,
                 email,
                 password,
                 profileImageUrl
-            })
+            });
+
             if(response.status === 201){
                 toast.success("Profile created successfully! 🎉");
                 navigate("/login");
@@ -70,23 +69,21 @@ const Signup = () => {
 
         } catch (error) {
             console.error('Something went wrong', error);
-            setError(error.message);
+            setError(error.response?.data?.message || error.message);
         } finally {
             setIsLoading(false);
         }
     }
-    
-    return (
 
+    return (
         <div className="h-screen w-full flex flex-col">
             <Header />
             <div className="flex-grow w-full relative flex items-center justify-center overflow-hidden">
                 {/* background image (blur) */}
 
                 <img src={assets.login_bg} alt="background" className="absolute inset-0 w-full h-full object-cover filter blur-sm" />
-           
                 <div className="relative z-10 w-full max-w-lg px-6">
-                    <div className="bg-white bg-opacity-95 backdrop-blur-sm rounded-lg shadow-2xl p-8 max-h-[90] overflow-y-auto">
+                    <div className="bg-white bg-opacity-95 backdrop-blur-sm rounded-lg shadow-2xl p-8 max-h-[90vh] overflow-y-auto">
                         <h3 className="text-2xl font-semibold text-black text-center mb-2">
                             Create An Account
                         </h3>
@@ -126,32 +123,30 @@ const Signup = () => {
                                     />
                                 </div>
                             </div>
-                                
-                                    {error && (
-                                        <p className="text-red-800 text-sm text-center bg-red-50 p-2 rounded">
-                                            {error}
-                                        </p>
-                                    )}
+                            {error && (
+                                <p className="text-red-800 text-sm text-center bg-red-50 p-2 rounded">
+                                    {error}
+                                </p>
+                            )}
 
-                                    <button disabled={isLoading} className={`btn-primary w-full py-3 text-lg font-medium flex items-center justify-center gap-2 ${isLoading ? 'opacity-60 cursor-not-allowed' : ''}`} type="submit" >
-                                        {isLoading ? (
-                                            <>
-                                                <LoaderCircle className="animate-spin w-5 h-5" />
-                                                Signing up ...
-                                            </>
-                                        ) : (
-                                            "SIGN UP"
-                                        )}
-                                    </button>
+                            <button disabled={isLoading} className={`btn-primary w-full py-3 text-lg font-medium flex items-center justify-center gap-2 ${isLoading ? 'opacity-60 cursor-not-allowed' : ''}`} type="submit" >
+                                {isLoading ? (
+                                    <>
+                                        <LoaderCircle className="animate-spin w-5 h-5" />
+                                        Signing up ...
+                                    </>
+                                ) : (
+                                    "SIGN UP"
+                                )}
+                            </button>
 
-                                    <p className="text-sm text-slate-800 text-center mt-6">
-                                        Already have an account ?
-                                        <Link to="/login" className="font-medium text-primary underline hover:text-primary-dark transition-colors">Login</Link>
-                                    </p>
+                            <p className="text-sm text-slate-800 text-center mt-6">
+                                Already have an account ?
+                                <Link to="/login" className="font-medium text-primary underline hover:text-primary-dark transition-colors"> Login</Link>
+                            </p>
                         </form>
                     </div>
                 </div>
-           
             </div>
         </div>
     )

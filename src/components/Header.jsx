@@ -1,15 +1,15 @@
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
-import {assets} from "../assets/assets.js";
-import {Link} from "react-router-dom";
+import { assets } from "../assets/assets.js";
+import { Link } from "react-router-dom";
 
 const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const navLinks = [
         { name: 'Home', to: '/home' },
-        { name: 'About us', to: '/about' },
-        { name: 'Contact us', to: '/contact' },
+        { name: 'About us', to: '/#' },
+        { name: 'Contact us', to: '/#' },
     ];
 
     return (
@@ -23,7 +23,11 @@ const Header = () => {
 
                     <nav className="hidden lg:flex items-center space-x-8">
                         {navLinks.map((link) => (
-                            <Link to={link.to} key={link.name} href={link.href} className="text-gray-600 hover:text-purple-600 transition-colors" >
+                            <Link
+                                to={link.to}
+                                key={link.name}
+                                className="text-gray-600 hover:text-[#299ED8] transition-colors"
+                            >
                                 {link.name}
                             </Link>
                         ))}
@@ -31,17 +35,19 @@ const Header = () => {
 
                     <div className="flex items-center space-x-4">
                         <div className="hidden sm:flex items-center space-x-4">
-                            <Link to="/login" className="text-gray-600" hover:text-purple-600 transition-colors>
+                            <Link
+                                to="/login"
+                                className="text-gray-600 hover:text-[#299ED8] transition-colors"
+                            >
                                 Login
                             </Link>
 
-                            <Link 
+                            <Link
                                 to="/signup"
-                                className="bg-purple-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-purple-700 transition-colors"
+                                className="bg-[#55C5ED] text-white px-4 py-2 rounded-lg font-semibold hover:bg-[#299ED8] transition-colors"
                             >
-                                Get Started
+                                शुरू करें
                             </Link>
-                    
                         </div>
 
                         <button
@@ -49,7 +55,7 @@ const Header = () => {
                             className="lg:hidden p-2 rounded-md text-gray-600 hover:bg-gray-100"
                             aria-label="Toggle menu"
                         >
-                            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" /> }
+                            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
                         </button>
                     </div>
                 </div>
@@ -60,22 +66,32 @@ const Header = () => {
                     <div className="container mx-auto px-4 py-4">
                         <nav className="flex flex-col space-y-4">
                             {navLinks.map((link) => (
-                                <a key={link.name} href={link.href} className="text-gray-600 hover:text-purple-600 transition-colors">
+                                <Link
+                                    key={link.name}
+                                    to={link.to}
+                                    onClick={() => setIsMenuOpen(false)}
+                                    className="text-gray-600 hover:text-[#299ED8] transition-colors"
+                                >
                                     {link.name}
-                                </a>
+                                </Link>
                             ))}
 
                             <div className="flex flex-col space-y-3 pt-4 border-t border-gray-100">
-                                <a href="#" className="text-gray-600 hover:text-purple-600 transition-colors">
-                                    Login
-                                </a>
-
-                                <a
-                                    href="#"
-                                    className="bg-purple-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-purple-700 transition-colors text-center"
+                                <Link
+                                    to="/login"
+                                    onClick={() => setIsMenuOpen(false)}
+                                    className="text-gray-600 hover:text-[#299ED8] transition-colors"
                                 >
-                                    Get Started
-                                </a>
+                                    Login
+                                </Link>
+
+                                <Link
+                                    to="/signup"
+                                    onClick={() => setIsMenuOpen(false)}
+                                    className="bg-[#55C5ED] text-white px-4 py-2 rounded-lg font-semibold hover:bg-[#299ED8] transition-colors text-center"
+                                >
+                                    शुरू करें
+                                </Link>
                             </div>
                         </nav>
                     </div>

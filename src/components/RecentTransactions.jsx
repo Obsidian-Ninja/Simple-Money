@@ -1,8 +1,8 @@
-import {ArrowRight} from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import TransactionInfoCard from "./TransactionInfoCard.jsx";
 import moment from "moment";
 
-const RecentTransactions = () => {
+const RecentTransactions = ({ transactions, onMore }) => {
     return (
         <div className="card">
             <div className="flex items-center justify-between">

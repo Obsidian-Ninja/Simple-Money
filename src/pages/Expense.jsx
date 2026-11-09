@@ -14,7 +14,7 @@ import DeleteAlert from "../components/DeleteAlert.jsx";
 const Expense = () => {
     useUser();
     const navigate = useNavigate();
-    const [exenseData, setExpenseData] = useState([]);
+    const [expenseData, setExpenseData] = useState([]);
     //New state for expense categories
     const [categories, setCategories] = useState([]); 
     const [loading, setLoading] = useState(false);
@@ -29,12 +29,13 @@ const Expense = () => {
         // Prevents multiple fetches if already loading
         if(loading) return; 
 
+        setLoading(true);
         try {
-            const response = axiosConfig.get(
+            const response = await axiosConfig.get(
                 `${API_ENDPOINTS.GET_ALL_EXPENSE}`
             );
 
-            if(response.date) {
+            if(response.data) {
                 setExpenseData(response.data);
             }
         } catch (error) {
@@ -43,7 +44,7 @@ const Expense = () => {
         } finally {
             setLoading(false);
         }
-};
+    };
 
 
     // Fetch expense categories
@@ -80,11 +81,6 @@ const Expense = () => {
             return;
         }
 
-        if(!categoryId){
-            toast.error("Category is a required field.");
-            return;
-        }
-
         if(!amount || isNaN(amount) || Number(amount) <= 0){
             toast.error("Amount should be a valid number greater than 0.");
             return;
@@ -102,7 +98,19 @@ const Expense = () => {
         }
 
         try {
-            
+            const response = await axiosConfig.post(API_ENDPOINTS.ADD_EXPENSE, {
+                name,
+                categoryId,
+                amount,
+                date,
+                icon
+            });
+
+            if(response.status === 201) {
+                toast.success("Expense added successfully! 🎉");
+                setOpenExpenseModal(false);
+                fetchExpenseDetails();
+            }
         } catch (error) {
             console.error("Error adding expense: ", error.response?.data?.message || error.message);
             toast.error(error.response?.data?.message || "Failed to add expense. Please try again in some time.");
@@ -128,7 +136,7 @@ const Expense = () => {
 
     const handleDownloadExpenseDetails = async () => {
         try {
-            const response = axiosConfig.get(
+            const response = await axiosConfig.get(
                 // Ensure this path is correct ("/download/income")
                 API_ENDPOINTS.EXPENSE_EXCEL_DOWNLOAD,
                 {
@@ -203,7 +211,7 @@ const Expense = () => {
 
                     <Modal
                     isOpen={openAddExpenseModal}
-                    onClose={() => setOpenAddExpenseModal(false)}
+                    onClose={() => setOpenExpenseModal(false)}
                     title="Add Expense"
                     >
 
@@ -213,7 +221,8 @@ const Expense = () => {
                             // pass the categories here
                             categories={categories}
                         />
-                        
+                    </Modal>
+
                     <Modal
                         isOpen={openDeleteAlert.show}
                         onClose={() => setOpenDeleteAlert({ show: false, data: null })}
@@ -224,12 +233,10 @@ const Expense = () => {
                             onDelete={() => deleteExpense(openDeleteAlert.data)}
                         />
                     </Modal>
-
-                    </Modal>
                 </div>
             </div>
         </Dashboard>
     )
-}    
+}   
 
 export default Expense;

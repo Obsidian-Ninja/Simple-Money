@@ -3,9 +3,8 @@ import EmojiPickerPopup from "./EmojiPickerPopup.jsx";
 import Input from "./Input.jsx";
 
 const AddExpenseForm = ({onAddExpense, categories}) => {
-    
     const [expense, setExpense] = useState({
-        name,
+        name: "",
         categoryId: "",
         amount: "",
         date: "",
@@ -18,14 +17,18 @@ const AddExpenseForm = ({onAddExpense, categories}) => {
         }
     }, [categories, expense.categoryId]);
 
-    const handleChange = categories.map((cat) => ({
+    const handleChange = (key, value) => {
+        setExpense((prev) => ({...prev, [key]: value}));
+    };
+
+    const categoryOptions = categories.map((cat) => ({
         value: cat.id,
         label: `${cat.name}`,
     }));
-    
+
     return (
         <div>
-            <EmojiPickerPopup 
+            <EmojiPickerPopup
                 icon={expense.icon}
                 onSelect={(selectedIcon) => handleChange("icon", selectedIcon)}
             />
@@ -38,7 +41,7 @@ const AddExpenseForm = ({onAddExpense, categories}) => {
                 type="text"
             />
 
-             <Input
+            <Input
                 value={expense.categoryId}
                 onChange={({target}) => handleChange("categoryId", target.value)}
                 label="Category"
@@ -46,7 +49,7 @@ const AddExpenseForm = ({onAddExpense, categories}) => {
                 options={categoryOptions}
             />
 
-             <Input
+            <Input
                 value={expense.amount}
                 onChange={({target}) => handleChange("amount", target.value)}
                 label="Amount"
@@ -54,7 +57,7 @@ const AddExpenseForm = ({onAddExpense, categories}) => {
                 type="number"
             />
 
-             <Input
+            <Input
                 value={expense.date}
                 onChange={({target}) => handleChange("date", target.value)}
                 label="Date"

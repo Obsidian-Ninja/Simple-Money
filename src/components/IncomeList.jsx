@@ -1,13 +1,14 @@
 import { Download, LoaderCircle, Mail } from "lucide-react";
 import { useState } from "react";
+import moment from "moment";
 import TransactionInfoCard from "./TransactionInfoCard.jsx";
 
 const IncomeList = ({transactions, onDelete, onDownload, onEmail}) => {
-    
     const [loading, setLoading] = useState(false);
+
     const handleEmail = async () => {
         setLoading(true);
-        try{
+        try {
             await onEmail();
         } finally {
             setLoading(false);
@@ -16,20 +17,20 @@ const IncomeList = ({transactions, onDelete, onDownload, onEmail}) => {
 
     const handleDownload = async () => {
         setLoading(true);
-        try{
+        try {
             await onDownload();
         }
-        finally{
+        finally {
             setLoading(false);
         }
     }
-    
+
     return (
         <div className="card">
             <div className="flex items-center justify-between">
                 <h5 className="text-lg">Income Sources</h5>
                 <div className="flex items-center justify-end gap-2">
-                    <button disabled={loading} className="card-btn" onClick={handleEmail}>
+                    <button type="button" disabled={loading} className="card-btn" onClick={handleEmail}>
                         {loading ? (
                             <>
                                 <LoaderCircle className="w-4 h-4 animate-spin" />
@@ -43,27 +44,25 @@ const IncomeList = ({transactions, onDelete, onDownload, onEmail}) => {
                         )}
                     </button>
 
-                    <button disabled={loading} className="card-btn" onClick={handleDownload}>
+                    <button type="button" disabled={loading} className="card-btn" onClick={handleDownload}>
                         {loading ? (
                             <>
                                 <LoaderCircle className="w-4 h-4 animate-spin" />
-                                Downloading ... 
+                                Downloading ...
                             </>
                         ) : (
-
                             <>
-                            <Download size={15} className="text-base" />
-                            Download
+                                <Download size={15} className="text-base" />
+                                Download
                             </>
                         )}
-
                     </button>
                 </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2">
                 {transactions?.map((income) => (
-                     <TransactionInfoCard
+                    <TransactionInfoCard
                         key={income.id}
                         title={income.name}
                         icon={income.icon}

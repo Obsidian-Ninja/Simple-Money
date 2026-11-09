@@ -1,6 +1,6 @@
 import Dashboard from "../components/Dashboard.jsx";
 import {useUser} from "../hooks/useUser.jsx";
-import {LucideScissorsSquareDashedBottom, Search} from "lucide-react";
+import {Search} from "lucide-react";
 import {useState} from "react";
 import axiosConfig from "../util/axiosConfig.jsx";
 import {API_ENDPOINTS} from "../util/apiEndpoints.js";
@@ -44,7 +44,7 @@ const Filter = () => {
 
     return (
         <Dashboard activeMenu="Filters">
-            <div styleName={styles['my-5 mx-auto']}>
+            <div className="my-5 mx-auto">
                 <div className="flex justify-between items-center mb-4">
                     <h2 className="text-2xl font-semibold">Filter Transactions</h2>
                 </div>
@@ -54,9 +54,9 @@ const Filter = () => {
                         <h5 className="text-lg font-semibold">Select the filters</h5>
                     </div>
 
-                    <form className="grid.grid-cols-1.sm:grid-cols-3.md:grid-cols-6.gap-4">
+                    <form onSubmit={handleSearch} className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-6 gap-4">
                         <div>
-                            <label className="block text-sm fomt-medium mb-1" htmlFor="type">Type</label>
+                            <label className="block text-sm font-medium mb-1" htmlFor="type">Type</label>
                             <select value={type} id="type" className="w-full border rounded px-3 py-3" onChange={e => setType(e.target.value)}>
                                 <option value="income">Income</option>
                                 <option value="expense">Expense</option>
@@ -94,7 +94,7 @@ const Filter = () => {
                                 <label htmlFor="keyword" className="block text-sm font-medium mb-1">Search</label>
                                 <input type="text" value={keyword} id="keyword" placeholder="Search..." className="w-full border rounded px-3 py-2" onChange={e => setKeyword(e.target.value)} />
                             </div>
-                            <button onClick={handleSearch} className="ml-2 mb-1 p-2 bg-purple-800 hover:bg-purple-800 text-white rounded flex items-center justify-center cursor-pointer">
+                            <button type="submit" className="ml-2 mb-1 p-2 bg-[#55C5ED] hover:bg-[#299ED8] text-white rounded flex items-center justify-center cursor-pointer">
                                 <Search size={20} />
                             </button>
                         </div>

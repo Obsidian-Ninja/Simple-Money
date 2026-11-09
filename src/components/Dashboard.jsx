@@ -1,9 +1,7 @@
 import Menubar from "./Menubar.jsx";
 import Sidebar from "./Sidebar.jsx";
-import {useContext} from "react";
-import {AppContext} from "../context/AppContext.jsx";
 
-const Dashboard = () => {
+const Dashboard = ({activeMenu, user, children}) => {
     return (
         <div>
             <Menubar activeMenu={activeMenu} />

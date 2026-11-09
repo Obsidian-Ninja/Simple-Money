@@ -4,7 +4,6 @@ import Input from "./Input.jsx";
 import EmojiPickerPopup from "./EmojiPickerPopup.jsx";
 
 const AddCategoryForm = ({onAddCategory, initialCategoryData, isEditing}) => {
-    
     const [category, setCategory] = useState({
         name: "",
         type: "income",
@@ -18,9 +17,9 @@ const AddCategoryForm = ({onAddCategory, initialCategoryData, isEditing}) => {
             setCategory(initialCategoryData);
         } else {
             setCategory({
-            name: "",
-            type: "income",
-            icon: ""
+                name: "",
+                type: "income",
+                icon: ""
             });
         }
     }, [isEditing, initialCategoryData] );
@@ -42,16 +41,16 @@ const AddCategoryForm = ({onAddCategory, initialCategoryData, isEditing}) => {
             setLoading(false);
         }
     }
-    
+
     return (
         <div className="p-4">
 
-            <EmojiPickerPopup 
+            <EmojiPickerPopup
                 icon={category.icon}
                 onSelect={(selectedIcon) => handleChange("icon", selectedIcon)}
             />
 
-            <Input 
+            <Input
                 value={category.name}
                 onChange={({target}) => handleChange("name", target.value)}
                 label="Category Name"
@@ -59,7 +58,7 @@ const AddCategoryForm = ({onAddCategory, initialCategoryData, isEditing}) => {
                 type="text"
             />
 
-            <Input 
+            <Input
                 value={category.type}
                 onChange={({target}) => handleChange("type", target.value)}
                 label="Category Type"

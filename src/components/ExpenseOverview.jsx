@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import CustomLineChart from "./CustomLineChart.jsx";
 import {prepareIncomeLineChartData} from "../util/util.js";
 
-const ExpenseOverview = ({transactions, onExpenseIncome}) => {
+const ExpenseOverview = ({transactions, onAddExpense}) => {
     const [chartData, setChartData] = useState([]);
 
     useEffect(() => {
@@ -21,7 +21,7 @@ const ExpenseOverview = ({transactions, onExpenseIncome}) => {
                     </p>
                 </div>
 
-                <button className="add-btn" onClick={onExpenseIncome}>
+                <button className="add-btn" onClick={onAddExpense}>
                     <Plus size={15} className="text-lg" />
                     Add Expense
                 </button>

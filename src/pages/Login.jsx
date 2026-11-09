@@ -10,17 +10,16 @@ import {LoaderCircle} from "lucide-react";
 import Header from "../components/Header.jsx";
 
 const Login = () => {
-    
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState(null);
-    const [loading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const {setUser} = useContext(AppContext);
 
     const navigate = useNavigate();
 
-    const handleSubmit = async () => {
-        email.preventDefault();
+    const handleSubmit = async (e) => {
+        e.preventDefault();
         setIsLoading(true);
 
         // Basic validation
@@ -41,7 +40,6 @@ const Login = () => {
 
         // login api call
         try {
-            
             const response = await axiosConfig.post(API_ENDPOINTS.LOGIN, {
                 email,
                 password,
@@ -55,39 +53,35 @@ const Login = () => {
             }
 
         } catch (error) {
-            if(error.response.data.message) {
-                console.error('Something went wrong', error);
+            console.error('Something went wrong', error);
+            if(error.response?.data?.message) {
                 setError(error.response.data.message);
             }
             else{
-                console.error('Something went wrong', error);
                 setError(error.message);
             }
         } finally {
             setIsLoading(false);
         }
     }
-    
 
     return (
-      <div className="h-screen w-full flex flex-col">
-        <Header />
-        <div className="flex-grow w-full relative flex items-center justify-center overflow-hidden">
-            
-            {/* background image with blur */}
-            <img src={assets.login_bg} alt="background" className="absolute inset-0 w-full h-full object-cover filter blur-sm" />
+        <div className="h-screen w-full flex flex-col">
+            <Header />
+            <div className="flex-grow w-full relative flex items-center justify-center overflow-hidden">
+                {/* background image with blur */}
+                <img src={assets.login_bg} alt="background" className="absolute inset-0 w-full h-full object-cover filter blur-sm" />
 
-            <div className="relative z-10 w-full max-w-md px-6">
-                <div className="bg-white bg-opacity-95 backdrop-blur-sm rounded-lg shadow-2xl p-8">
-                    <h3 className="text-2xl font-semibold text-black text-center mb-2">
-                        Welcome Back
-                    </h3>
-                    <p className="text-sm text-slate-700 text-center mb-8">
-                        Please enter your credentials to log in
-                    </p>
+                <div className="relative z-10 w-full max-w-md px-6">
+                    <div className="bg-white bg-opacity-95 backdrop-blur-sm rounded-lg shadow-2xl p-8">
+                        <h3 className="text-2xl font-semibold text-black text-center mb-2">
+                            Welcome Back
+                        </h3>
+                        <p className="text-sm text-slate-700 text-center mb-8">
+                            Please enter your credentials to log in
+                        </p>
 
-                    <form onSubmit={handleSubmit} className="space-y-4">
-                            
+                        <form onSubmit={handleSubmit} className="space-y-4">
                             <Input
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
@@ -121,7 +115,7 @@ const Login = () => {
 
                             <p className="text-sm text-slate-800 text-center mt-6">
                                 Don't have an account?
-                                <Link to="/signup" className="font-medium text-primary underline hover:text-primary-dark transition-colors">Signup</Link>
+                                <Link to="/signup" className="font-medium text-primary underline hover:text-primary-dark transition-colors"> Signup</Link>
                             </p>
                         </form>
                     </div>

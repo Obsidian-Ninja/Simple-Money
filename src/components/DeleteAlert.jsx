@@ -1,9 +1,10 @@
 import {useState} from "react";
 import {LoaderCircle} from "lucide-react";
 
-const DeleteAlert = () => {
+const DeleteAlert = ({onDelete, content}) => {
 
     const [loading, setLoading] = useState(false);
+
     const handleDelete = async () => {
         setLoading(true);
         try{
@@ -12,6 +13,7 @@ const DeleteAlert = () => {
             setLoading(false);
         }
     }
+
     return (
         <div>
             <p className="text-sm">{content}</p>
@@ -24,7 +26,7 @@ const DeleteAlert = () => {
 
                         {loading ? (
                             <>
-                                <LoaderCircle className="h-4 w-4 animated-spin" />
+                                <LoaderCircle className="h-4 w-4 animate-spin" />
                                 Deleting...
                             </>
                         ) : (
